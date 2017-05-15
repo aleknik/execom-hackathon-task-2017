@@ -1,6 +1,5 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
-import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,10 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
 import com.example.aleknik.execomhackathon2017.adapter.SaleItemAdapter;
+import com.example.aleknik.execomhackathon2017.database.repository.UserDAORepository;
 import com.example.aleknik.execomhackathon2017.model.SaleItem;
+import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -19,8 +21,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,20 +37,23 @@ public class MainActivity extends AppCompatActivity {
     @Bean
     SaleItemAdapter saleItemAdapter;
 
+    @Pref
+    UserPreferences_ userPreferences;
+
+    @Bean
+    UserDAORepository userDAORepository;
+
     private static final int LOGIN_REQUEST_CODE = 1;
 
     List<SaleItem> saleItems = new ArrayList<>();
 
     private boolean gridLayout;
 
-    private boolean logedIn = false;
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem logout = menu.findItem(R.id.logout);
         MenuItem login = menu.findItem(R.id.login);
-        if (logedIn) {
+        if (userPreferences.id().exists()) {
             logout.setVisible(true);
             login.setVisible(false);
         } else {
@@ -85,9 +90,17 @@ public class MainActivity extends AppCompatActivity {
         LoginActivity_.intent(this).startForResult(LOGIN_REQUEST_CODE);
     }
 
+    @OptionsItem(R.id.logout)
+    void loguot() {
+        userPreferences.id().remove();
+        invalidateOptionsMenu();
+        Toast.makeText(this, "Logout successful.", Toast.LENGTH_LONG).show();
+    }
+
     @OnActivityResult(LOGIN_REQUEST_CODE)
-    public void onLogin(Intent data, int resultCode) {
+    public void onLogin(int resultCode) {
         if (resultCode == RESULT_OK) {
+            invalidateOptionsMenu();
         }
     }
 

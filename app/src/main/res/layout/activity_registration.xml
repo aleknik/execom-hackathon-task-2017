@@ -75,14 +75,4 @@
         android:layout_marginBottom="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/register" />
-
-    <TextView android:id="@+id/loginLink"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Already a member? Login"
-        android:gravity="center"
-        android:textSize="16sp"/>
-
-
 </LinearLayout>
