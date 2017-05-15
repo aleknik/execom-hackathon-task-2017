@@ -6,4 +6,7 @@
     <string name="logout">Logout</string>
     <string name="layout_toggle">Layout toggle</string>
     <string name="signup_link">No account yet? Create one</string>
+    <string name="register">Register</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
 </resources>

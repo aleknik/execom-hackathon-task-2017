@@ -11,15 +11,14 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_login)
-public class LoginActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_registration)
+public class RegistrationActivity extends AppCompatActivity {
 
     @ViewById
-    TextView registerLink;
+    TextView loginLink;
 
-    @Click(R.id.registerLink)
-    void register() {
-        RegistrationActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NO_HISTORY).start();
+    @Click(R.id.loginLink)
+    void login() {
+        LoginActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT).start();
     }
-
 }

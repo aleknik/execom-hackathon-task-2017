@@ -25,9 +25,6 @@ public class User {
     @DatabaseField(canBeNull = false)
     private String password;
 
-    @ForeignCollectionField(eager = true)
-    private Collection<SaleItem> saleItems = new ArrayList<>();
-
     public User() {
     }
 
@@ -76,14 +73,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Collection<SaleItem> getSaleItems() {
-        return saleItems;
-    }
-
-    public void setSaleItems(Collection<SaleItem> saleItems) {
-        this.saleItems = saleItems;
     }
 
     @Override

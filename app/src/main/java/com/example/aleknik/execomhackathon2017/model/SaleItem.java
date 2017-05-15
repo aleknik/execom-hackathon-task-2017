@@ -19,7 +19,7 @@ public class SaleItem {
     private Date publishDate;
 
     @DatabaseField(columnName = "user", canBeNull = false, foreign = true)
-    private transient User user;
+    private User user;
 
     public SaleItem() {
     }
