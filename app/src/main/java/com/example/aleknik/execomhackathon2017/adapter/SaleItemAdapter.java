@@ -23,6 +23,7 @@ public class SaleItemAdapter extends RecyclerViewAdapterBase<SaleItem, SaleItemI
         return SaleItemItemView_.build(context);
     }
 
+
     @Override
     public void onBindViewHolder(ViewWrapper<SaleItemItemView> holder, int position) {
         SaleItemItemView view = holder.getView();
