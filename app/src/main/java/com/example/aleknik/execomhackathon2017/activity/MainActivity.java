@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean gridLayout;
 
+    private LinearLayoutManager linearLayoutManager;
+    private StaggeredGridLayoutManager gridLayoutManager;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem logout = menu.findItem(R.id.logout);
@@ -67,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
     @AfterViews
     void init() {
         initData();
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false));
-
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        gridLayoutManager = new StaggeredGridLayoutManager(2,1);
+        recyclerView.setLayoutManager(linearLayoutManager);
         gridLayout = false;
         recyclerView.setAdapter(saleItemAdapter);
 
@@ -80,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
 
         for (int i = 0; i < 20; i++) {
-            saleItems.add(new SaleItem("test" + i, "desc" + i, new Date()));
+            if (i % 3 == 0)
+                saleItems.add(new SaleItem("test" + i, "desc as das d asas sad as" +
+                        "asdsadas asd as asd " +
+                        " das da das as d d sad asdsd as da sdasd as sd  as da sd asd as da sd sa da d" + i, new Date()));
+            else if (i % 3 == 1)
+                saleItems.add(new SaleItem("test" + i, "desc as dassad as d a" + i, new Date()));
+            else
+                saleItems.add(new SaleItem("test" + i, "desc assad  sad as sad ad  dassad as d a" + i, new Date()));
         }
 
     }
@@ -109,13 +119,12 @@ public class MainActivity extends AppCompatActivity {
     void changeLayout(MenuItem layoutOption) {
 
         if (gridLayout) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                    LinearLayoutManager.VERTICAL, false));
+            recyclerView.setLayoutManager(linearLayoutManager);
             gridLayout = false;
-            layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_column_white_24dp, null));
+            layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_quilt_white_24dp, null));
 
         } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            recyclerView.setLayoutManager(gridLayoutManager);
             gridLayout = true;
             layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_stream_white_24dp, null));
         }
