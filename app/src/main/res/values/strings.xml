@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ExecomHackathon2017</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="logout">Logout</string>
+    <string name="layout_toggle">Layout toggle</string>
+    <string name="signup_link">No account yet? Create one</string>
 </resources>
