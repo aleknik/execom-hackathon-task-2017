@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     @ViewById
     FloatingActionButton fab;
+
+    @ViewById
+    TextView emptyView;
 
     @Bean
     SaleItemAdapter saleItemAdapter;
@@ -90,12 +95,24 @@ public class MainActivity extends AppCompatActivity {
         setTitle(getResources().getString(R.string.my_items));
         saleItemAdapter.setItems(saleItemDAORepository.findByUser(userDAORepository.getLoggedInUser()));
         saleItemAdapter.notifyDataSetChanged();
+        setEmptyMessage();
     }
 
     private void showAllItems() {
         setTitle(getResources().getString(R.string.all_items));
         saleItemAdapter.setItems(saleItemDAORepository.findAll());
         saleItemAdapter.notifyDataSetChanged();
+        setEmptyMessage();
+    }
+
+    private void setEmptyMessage() {
+        if (saleItemAdapter.getItemCount() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @AfterViews
@@ -113,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             showAllItems();
         }
     }
+
     @OptionsItem(R.id.login)
     void login() {
         LoginActivity_.intent(this).startForResult(LOGIN_REQUEST_CODE);
