@@ -16,27 +16,46 @@
         android:layout_margin="@dimen/medium_margin"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/large_text" />
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight=".70"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/large_text" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/large_text" />
+
+        </LinearLayout>
+
+
+        <LinearLayout xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/itemPhoto"
                 android:layout_width="@dimen/image_large_size"
                 android:layout_height="@dimen/image_large_size"
                 android:layout_margin="@dimen/small_margin"
-                android:src="@mipmap/ic_launcher" />
+                fresco:placeholderImage="@drawable/placeholder" />
 
             <TextView
                 android:id="@+id/description"

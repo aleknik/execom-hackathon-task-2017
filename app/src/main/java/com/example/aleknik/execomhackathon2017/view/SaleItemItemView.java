@@ -10,6 +10,8 @@ import com.example.aleknik.execomhackathon2017.model.SaleItem;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Locale;
+
 @EViewGroup(R.layout.item_view_sale_item)
 public class SaleItemItemView extends RelativeLayout {
 
@@ -19,6 +21,9 @@ public class SaleItemItemView extends RelativeLayout {
     @ViewById
     TextView description;
 
+    @ViewById
+    TextView price;
+
     public SaleItemItemView(Context context) {
         super(context);
     }
@@ -26,5 +31,6 @@ public class SaleItemItemView extends RelativeLayout {
     public void bind(SaleItem item) {
         name.setText(item.getName());
         description.setText(item.getDescription());
+        price.setText(String.format(Locale.ENGLISH, "%.2f %s", item.getPrice(), "$"));
     }
 }

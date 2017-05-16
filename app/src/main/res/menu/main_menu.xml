@@ -15,6 +15,10 @@
         android:title="@string/all_items"
         app:showAsAction="never" />
     <item
+        android:id="@+id/register"
+        android:title="@string/register"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/logout"
         android:title="@string/logout"
         app:showAsAction="never" />

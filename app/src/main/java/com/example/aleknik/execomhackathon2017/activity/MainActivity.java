@@ -1,5 +1,6 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,30 +32,22 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 @OptionsMenu(R.menu.main_menu)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
-    @ViewById
-    RecyclerView recyclerView;
-
-    @ViewById
-    FloatingActionButton fab;
-
-    @ViewById
-    TextView emptyView;
-
-    @Bean
-    SaleItemAdapter saleItemAdapter;
-
-    @Pref
-    UserPreferences_ userPreferences;
-
-    @Bean
-    UserDAORepository userDAORepository;
-
-    @Bean
-    SaleItemDAORepository saleItemDAORepository;
-
     private static final int LOGIN_REQUEST_CODE = 1;
     private static final int ADD_REQUEST_CODE = 2;
-
+    @ViewById
+    RecyclerView recyclerView;
+    @ViewById
+    FloatingActionButton fab;
+    @ViewById
+    TextView emptyView;
+    @Bean
+    SaleItemAdapter saleItemAdapter;
+    @Pref
+    UserPreferences_ userPreferences;
+    @Bean
+    UserDAORepository userDAORepository;
+    @Bean
+    SaleItemDAORepository saleItemDAORepository;
     private boolean gridLayout;
 
     private LinearLayoutManager linearLayoutManager;
@@ -65,15 +58,18 @@ public class MainActivity extends AppCompatActivity {
         MenuItem logout = menu.findItem(R.id.logout);
         MenuItem login = menu.findItem(R.id.login);
         MenuItem myItems = menu.findItem(R.id.myItems);
+        MenuItem register = menu.findItem(R.id.register);
         if (userPreferences.id().exists()) {
             logout.setVisible(true);
             login.setVisible(false);
             myItems.setVisible(true);
+            register.setVisible(false);
             fab.show();
         } else {
             logout.setVisible(false);
             login.setVisible(true);
             myItems.setVisible(false);
+            register.setVisible(true);
             fab.hide();
         }
         return true;
@@ -153,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
     void showMyItemsClick() {
         showMyItems();
 
+    }
+
+    @OptionsItem(R.id.register)
+    void register() {
+        RegistrationActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NO_HISTORY).start();
     }
 
 

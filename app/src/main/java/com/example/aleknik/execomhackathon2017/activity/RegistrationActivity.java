@@ -5,9 +5,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
-import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
 import com.example.aleknik.execomhackathon2017.model.User;
 import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
+import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -26,10 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText password;
 
     @ViewById
-    EditText firstName;
-
-    @ViewById
-    EditText lastName;
+    EditText name;
 
     @Pref
     UserPreferences_ userPreferences;
@@ -42,8 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
     void register() {
         if (email.getText().toString().equals("") ||
                 password.getText().toString().equals("") ||
-                firstName.getText().toString().equals("") ||
-                lastName.getText().toString().equals("")) {
+                name.getText().toString().equals("")) {
             Toast.makeText(this, "All fields must be filled!", Toast.LENGTH_LONG).show();
             return;
         }
@@ -52,8 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         user.setEmail(email.getText().toString());
         user.setPassword(password.getText().toString());
-        user.setFirstName(firstName.getText().toString());
-        user.setLastName(lastName.getText().toString());
+        user.setName(name.getText().toString());
 
         if (!userDAORepository.emailTaken(user.getEmail())) {
             userDAORepository.register(user);

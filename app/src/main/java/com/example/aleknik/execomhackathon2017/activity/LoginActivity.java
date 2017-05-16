@@ -8,9 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
-import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
 import com.example.aleknik.execomhackathon2017.model.User;
 import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
+import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Login failed!", Toast.LENGTH_LONG).show();
         }
     }
-
 
 
 }
