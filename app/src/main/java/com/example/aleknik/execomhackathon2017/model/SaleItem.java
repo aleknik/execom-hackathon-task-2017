@@ -18,23 +18,20 @@ public class SaleItem {
     @DatabaseField(canBeNull = false)
     private Date publishDate;
 
+    @DatabaseField(canBeNull = false)
+    private double price;
+
     @DatabaseField(columnName = "user", canBeNull = false, foreign = true)
     private User user;
 
     public SaleItem() {
     }
 
-    public SaleItem(String name, String description, Date publishDate, User user) {
+    public SaleItem(String name, String description, Date publishDate, double price) {
         this.name = name;
         this.description = description;
         this.publishDate = publishDate;
-        this.user = user;
-    }
-
-    public SaleItem(String name, String description, Date publishDate) {
-        this.name = name;
-        this.description = description;
-        this.publishDate = publishDate;
+        this.price = price;
     }
 
     public long getId() {
@@ -75,5 +72,13 @@ public class SaleItem {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

@@ -9,4 +9,10 @@
     <string name="register">Register</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="publish">Publish</string>
+    <string name="all_items">All items</string>
+    <string name="my_items">My sell listings</string>
 </resources>

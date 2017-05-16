@@ -5,7 +5,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
-import com.example.aleknik.execomhackathon2017.database.repository.UserDAORepository;
+import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
 import com.example.aleknik.execomhackathon2017.model.User;
 import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
 

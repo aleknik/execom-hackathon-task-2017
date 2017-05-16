@@ -1,4 +1,4 @@
-package com.example.aleknik.execomhackathon2017.database.repository;
+package com.example.aleknik.execomhackathon2017.repository;
 
 
 import com.example.aleknik.execomhackathon2017.database.DatabaseHelper;
