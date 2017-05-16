@@ -56,4 +56,8 @@ public class UserDAORepository {
     public User getLoggedInUser() {
         return findById(userPreferences.id().get());
     }
+
+    public void refresh(User user) {
+        userDAO.refresh(user);
+    }
 }

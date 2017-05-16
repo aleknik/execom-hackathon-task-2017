@@ -14,4 +14,5 @@
     <string name="all_items">All Items</string>
     <string name="my_items">My Listings</string>
     <string name="no_data_available">Wow, such empty</string>
+    <string name="seller_contact">Seller contact</string>
 </resources>

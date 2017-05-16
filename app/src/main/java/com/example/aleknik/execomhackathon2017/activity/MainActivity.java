@@ -1,5 +1,6 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
@@ -15,39 +16,58 @@ import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
 import com.example.aleknik.execomhackathon2017.adapter.SaleItemAdapter;
+import com.example.aleknik.execomhackathon2017.listener.OnItemClickListener;
+import com.example.aleknik.execomhackathon2017.model.SaleItem;
 import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
 import com.example.aleknik.execomhackathon2017.repository.SaleItemDAORepository;
 import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
+import com.google.gson.Gson;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 @OptionsMenu(R.menu.main_menu)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+
     private static final int LOGIN_REQUEST_CODE = 1;
+
     private static final int ADD_REQUEST_CODE = 2;
+
+    private static final int ITEM_REQUEST_CODE = 3;
+
     @ViewById
     RecyclerView recyclerView;
+
     @ViewById
     FloatingActionButton fab;
+
     @ViewById
     TextView emptyView;
+
     @Bean
     SaleItemAdapter saleItemAdapter;
+
     @Pref
     UserPreferences_ userPreferences;
+
     @Bean
     UserDAORepository userDAORepository;
+
     @Bean
     SaleItemDAORepository saleItemDAORepository;
+
+    final Gson gson = new Gson();
+
     private boolean gridLayout;
 
     private LinearLayoutManager linearLayoutManager;
@@ -113,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
 
     @AfterViews
     void init() {
+
+        saleItemAdapter.setListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(SaleItem item) {
+                goToDetails(item);
+            }
+        });
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new StaggeredGridLayoutManager(2, 1);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -125,6 +152,10 @@ public class MainActivity extends AppCompatActivity {
             fab.hide();
             showAllItems();
         }
+    }
+
+    void goToDetails(SaleItem item){
+        SaleItemDetailsActivity_.intent(this).extra("item", gson.toJson(item)).start();
     }
 
     @OptionsItem(R.id.login)
@@ -173,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(linearLayoutManager);
             gridLayout = false;
             layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_quilt_white_24dp, null));
-
         } else {
             recyclerView.setLayoutManager(gridLayoutManager);
             gridLayout = true;

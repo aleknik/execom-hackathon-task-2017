@@ -18,13 +18,17 @@ public class User {
     @DatabaseField(canBeNull = false)
     private String password;
 
+    @DatabaseField(canBeNull = false)
+    private String contact;
+
     public User() {
     }
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String contact) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.contact = contact;
     }
 
     public long getId() {
@@ -59,13 +63,11 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

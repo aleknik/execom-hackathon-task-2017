@@ -28,6 +28,9 @@ public class RegistrationActivity extends AppCompatActivity {
     @ViewById
     EditText name;
 
+    @ViewById
+    EditText contact;
+
     @Pref
     UserPreferences_ userPreferences;
 
@@ -39,7 +42,8 @@ public class RegistrationActivity extends AppCompatActivity {
     void register() {
         if (email.getText().toString().equals("") ||
                 password.getText().toString().equals("") ||
-                name.getText().toString().equals("")) {
+                name.getText().toString().equals("") ||
+                contact.getText().toString().equals("")) {
             Toast.makeText(this, "All fields must be filled!", Toast.LENGTH_LONG).show();
             return;
         }
@@ -49,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
         user.setEmail(email.getText().toString());
         user.setPassword(password.getText().toString());
         user.setName(name.getText().toString());
+        user.setContact(contact.getText().toString());
 
         if (!userDAORepository.emailTaken(user.getEmail())) {
             userDAORepository.register(user);

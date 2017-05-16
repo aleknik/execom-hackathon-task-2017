@@ -34,6 +34,9 @@
         <activity
             android:name=".activity.NewSaleItemActivity_"
             android:label="New Item" />
+        <activity
+            android:name=".activity.SaleItemDetailsActivity_"
+            android:label="Item Details" />
     </application>
 
 </manifest>
