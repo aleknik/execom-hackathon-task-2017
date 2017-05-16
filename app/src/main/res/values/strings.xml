@@ -12,6 +12,6 @@
     <string name="price">Price</string>
     <string name="publish">Publish</string>
     <string name="all_items">All Items</string>
-    <string name="my_items">My Sell Listings</string>
+    <string name="my_items">My Listings</string>
     <string name="no_data_available">Wow, such empty</string>
 </resources>
