@@ -37,4 +37,13 @@ public class SaleItemDAORepository {
         return saleItems;
     }
 
+    public SaleItem update(SaleItem saleItem) {
+        saleItemDAO.update(saleItem);
+        return saleItemDAO.queryForId(saleItem.getId());
+    }
+
+    public void delete(long id) {
+        saleItemDAO.deleteById(id);
+    }
+
 }

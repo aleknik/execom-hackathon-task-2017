@@ -3,6 +3,7 @@ package com.example.aleknik.execomhackathon2017.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aleknik.execomhackathon2017.R;
 import com.example.aleknik.execomhackathon2017.model.SaleItem;
@@ -39,6 +40,14 @@ public class NewSaleItemActivity extends AppCompatActivity {
 
     @Click
     void add() {
+
+        if (name.getText().toString().equals("") ||
+                description.getText().toString().equals("") ||
+                price.getText().toString().equals("")) {
+            Toast.makeText(this, "All fields must be filled!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         SaleItem saleItem = new SaleItem(name.getText().toString(),
                 description.getText().toString(), new Date(),
                 Double.parseDouble(price.getText().toString()));

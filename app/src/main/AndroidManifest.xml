@@ -33,10 +33,25 @@
             android:label="Register" />
         <activity
             android:name=".activity.NewSaleItemActivity_"
-            android:label="New Item" />
+            android:label="New Item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
         <activity
             android:name=".activity.SaleItemDetailsActivity_"
-            android:label="Item Details" />
+            android:label="Item Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
+        <activity
+            android:name=".activity.SaleItemEditActivity_"
+            android:label="Edit item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SaleItemDetailsActivity_" />
+        </activity>
     </application>
 
 </manifest>

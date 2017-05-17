@@ -1,6 +1,5 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
@@ -27,11 +26,9 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
@@ -69,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     final Gson gson = new Gson();
 
     private boolean gridLayout;
+    private boolean allItems;
 
     private LinearLayoutManager linearLayoutManager;
     private StaggeredGridLayoutManager gridLayoutManager;
@@ -112,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         saleItemAdapter.setItems(saleItemDAORepository.findByUser(userDAORepository.getLoggedInUser()));
         saleItemAdapter.notifyDataSetChanged();
         setEmptyMessage();
+        allItems = false;
     }
 
     private void showAllItems() {
@@ -119,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         saleItemAdapter.setItems(saleItemDAORepository.findAll());
         saleItemAdapter.notifyDataSetChanged();
         setEmptyMessage();
+        allItems = true;
     }
 
     private void setEmptyMessage() {
@@ -154,8 +154,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void goToDetails(SaleItem item){
-        SaleItemDetailsActivity_.intent(this).extra("item", gson.toJson(item)).start();
+    void goToDetails(SaleItem item) {
+        SaleItemDetailsActivity_.intent(this).extra("item", gson.toJson(item)).startForResult(ITEM_REQUEST_CODE);
+    }
+
+
+    @OnActivityResult(ITEM_REQUEST_CODE)
+    public void onDetails(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            if (allItems)
+                showAllItems();
+            else
+                showMyItems();
+        }
     }
 
     @OptionsItem(R.id.login)
@@ -196,6 +207,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (allItems)
+            showAllItems();
+        else
+            showMyItems();
+    }
 
     @OptionsItem(R.id.layoutOption)
     void changeLayout(MenuItem layoutOption) {
