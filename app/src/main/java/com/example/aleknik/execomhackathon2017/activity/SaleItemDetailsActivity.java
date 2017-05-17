@@ -66,7 +66,7 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         MenuItem edit = menu.findItem(R.id.edit);
         MenuItem delete = menu.findItem(R.id.delete);
         if (userPreferences.id().exists() &&
-                userDAORepository.getLoggedInUser().getId() == userPreferences.id().get()) {
+                saleItem.getUser().getId() == userPreferences.id().get()) {
             edit.setVisible(true);
             delete.setVisible(true);
         } else {
