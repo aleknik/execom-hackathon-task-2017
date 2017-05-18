@@ -112,7 +112,8 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f $", saleItem.getPrice()));
         sellerContact.setText(saleItem.getUser().getContact());
-        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
+        if(saleItem.getImagePath() != null)
+            image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
     }
 
     @OptionsItem(R.id.edit)

@@ -38,6 +38,7 @@ public class SaleItemItemView extends RelativeLayout {
         name.setText(item.getName());
         description.setText(item.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f %s", item.getPrice(), "$"));
-        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(item.getImagePath()).build());
+        if (item.getImagePath() != null)
+            image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(item.getImagePath()).build());
     }
 }

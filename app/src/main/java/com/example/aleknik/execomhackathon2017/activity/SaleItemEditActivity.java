@@ -87,7 +87,8 @@ public class SaleItemEditActivity extends AppCompatActivity {
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f", saleItem.getPrice()));
         currentPhotoPath = saleItem.getImagePath();
-        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
+        if(saleItem.getImagePath() != null)
+            image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
 
 
     }
