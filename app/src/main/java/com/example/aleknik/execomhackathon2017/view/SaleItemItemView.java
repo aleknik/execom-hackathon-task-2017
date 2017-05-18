@@ -40,5 +40,7 @@ public class SaleItemItemView extends RelativeLayout {
         price.setText(String.format(Locale.ENGLISH, "%.2f %s", item.getPrice(), "$"));
         if (item.getImagePath() != null)
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(item.getImagePath()).build());
+        else
+            image.setImageResource(R.drawable.placeholder);
     }
 }

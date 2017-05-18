@@ -76,18 +76,21 @@ public class MainActivity extends AppCompatActivity {
         MenuItem logout = menu.findItem(R.id.logout);
         MenuItem login = menu.findItem(R.id.login);
         MenuItem myItems = menu.findItem(R.id.myItems);
+        MenuItem allItems = menu.findItem(R.id.allItems);
         MenuItem register = menu.findItem(R.id.register);
         if (userPreferences.id().exists()) {
             logout.setVisible(true);
             login.setVisible(false);
             myItems.setVisible(true);
             register.setVisible(false);
+            allItems.setVisible(true);
             fab.show();
         } else {
             logout.setVisible(false);
             login.setVisible(true);
             myItems.setVisible(false);
             register.setVisible(true);
+            allItems.setVisible(false);
             fab.hide();
         }
         return true;
