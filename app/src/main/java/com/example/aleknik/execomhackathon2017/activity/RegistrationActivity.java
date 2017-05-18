@@ -63,4 +63,10 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Registration failed, email already exists.", Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

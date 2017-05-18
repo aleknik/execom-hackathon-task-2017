@@ -2,6 +2,7 @@ package com.example.aleknik.execomhackathon2017.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,6 +14,9 @@ import com.example.aleknik.execomhackathon2017.model.SaleItem;
 import com.example.aleknik.execomhackathon2017.preference.UserPreferences_;
 import com.example.aleknik.execomhackathon2017.repository.SaleItemDAORepository;
 import com.example.aleknik.execomhackathon2017.repository.UserDAORepository;
+import com.example.aleknik.execomhackathon2017.utils.FileUtils;
+import com.facebook.common.util.UriUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 
 import org.androidannotations.annotations.AfterViews;
@@ -51,8 +55,14 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
     @ViewById
     TextView sellerContact;
 
+    @ViewById
+    SimpleDraweeView image;
+
     @Bean
     SaleItemDAORepository saleItemDAORepository;
+
+    @Bean
+    FileUtils fileUtils;
 
     private final Gson gson = new Gson();
 
@@ -89,6 +99,7 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f $", saleItem.getPrice()));
         sellerContact.setText(saleItem.getUser().getContact());
+        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
     }
 
     @OptionsItem(R.id.edit)
@@ -113,6 +124,7 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         saleItemDAORepository.delete(saleItem.getId());
+                        fileUtils.deleteImage(saleItem.getImagePath());
                         setResult(RESULT_OK);
                         finish();
                         break;
@@ -126,5 +138,12 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
+        finish();
     }
 }

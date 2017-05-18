@@ -24,6 +24,9 @@ public class SaleItem {
     @DatabaseField(columnName = "user", canBeNull = false, foreign = true)
     private User user;
 
+    @DatabaseField
+    private String imagePath;
+
     public SaleItem() {
     }
 
@@ -80,5 +83,13 @@ public class SaleItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

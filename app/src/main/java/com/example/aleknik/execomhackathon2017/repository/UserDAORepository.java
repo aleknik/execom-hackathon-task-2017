@@ -37,7 +37,6 @@ public class UserDAORepository {
 
     public void register(User user) {
         userDAO.create(user);
-        userPreferences.id().put(user.getId());
     }
 
     public boolean emailTaken(String email) {
