@@ -28,6 +28,10 @@ public class FileUtils {
     }
 
     public boolean deleteImage(String path) {
+        if (path == null)
+        {
+            return false;
+        }
         final File file = new File(path);
         final File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         final File imageDir = new File(String.format("%s/ExecomHackathon2017", storageDir.getAbsolutePath()));

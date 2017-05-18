@@ -1,7 +1,10 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +43,17 @@ public class LoginActivity extends AppCompatActivity {
     @Bean
     UserDAORepository userDAORepository;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Click(R.id.registerLink)
     void register() {
         RegistrationActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NO_HISTORY).start();
@@ -53,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             final Intent intent = new Intent();
             setResult(RESULT_OK, intent);
+            Toast.makeText(this, "Login successful.", Toast.LENGTH_LONG).show();
             finish();
         } else {
             Toast.makeText(this, "Login failed!", Toast.LENGTH_LONG).show();

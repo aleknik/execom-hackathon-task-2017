@@ -3,7 +3,7 @@
     <string name="login">Log In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Log out</string>
     <string name="layout_toggle">Layout Toggle</string>
     <string name="signup_link">No account yet? Create one</string>
     <string name="register">Register</string>

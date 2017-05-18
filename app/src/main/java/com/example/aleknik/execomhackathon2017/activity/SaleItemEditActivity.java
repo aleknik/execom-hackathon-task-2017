@@ -3,8 +3,10 @@ package com.example.aleknik.execomhackathon2017.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,8 +86,21 @@ public class SaleItemEditActivity extends AppCompatActivity {
         name.setText(saleItem.getName());
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f", saleItem.getPrice()));
-        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
+        currentPhotoPath = saleItem.getImagePath();
+        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
 
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OptionsItem
@@ -102,7 +117,7 @@ public class SaleItemEditActivity extends AppCompatActivity {
         saleItem.setPrice(Double.parseDouble(price.getText().toString()));
         saleItem.setImagePath(currentPhotoPath);
 
-        if (!currentPhotoPath.equals(saleItem.getImagePath())) {
+        if (currentPhotoPath != null && !currentPhotoPath.equals(saleItem.getImagePath())) {
             fileUtils.deleteImage(saleItem.getImagePath());
         }
         saleItem.setImagePath(currentPhotoPath);
@@ -120,16 +135,12 @@ public class SaleItemEditActivity extends AppCompatActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             try {
-                // gets a file for the photo to be stored in
                 final File photoFile = fileUtils.createImageFile();
 
-                // we will need its path for later.
                 currentPhotoPath = photoFile.getAbsolutePath();
                 Log.d(TAG, currentPhotoPath);
 
-                // tell the system what file to write to if the picture is taken.
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                // this starts up the camera.
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage(), e);
@@ -139,10 +150,8 @@ public class SaleItemEditActivity extends AppCompatActivity {
 
     @OnActivityResult(REQUEST_IMAGE_CAPTURE)
     void onOpenCamera(int resultCode, Intent data) {
-        // do stuff if the photo has been taken.
         if (resultCode == RESULT_OK) {
             Log.d(TAG, currentPhotoPath);
-            // the path to the image is in our variable, but we need the uri to load it.
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
         }
     }

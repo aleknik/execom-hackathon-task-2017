@@ -27,19 +27,39 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity_"
-            android:label="Log In" />
+            android:label="Log In">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
         <activity
             android:name=".activity.RegistrationActivity_"
-            android:label="Register" />
+            android:label="Register">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
         <activity
             android:name=".activity.NewSaleItemActivity_"
-            android:label="New Item" />
+            android:label="New Item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
         <activity
             android:name=".activity.SaleItemDetailsActivity_"
-            android:label="Item Details" />
+            android:label="Item Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
         <activity
             android:name=".activity.SaleItemEditActivity_"
-            android:label="Edit Item" />
+            android:label="Edit Item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity_" />
+        </activity>
     </application>
 
 </manifest>
