@@ -75,6 +75,24 @@
                 android:maxLines="1"
                 android:textColor="@color/secondary_text" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/publish_date"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/large_text" />
+
+            <TextView
+                android:id="@+id/publishDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/large_margin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/secondary_text" />
+
 
             <TextView
                 android:layout_width="match_parent"

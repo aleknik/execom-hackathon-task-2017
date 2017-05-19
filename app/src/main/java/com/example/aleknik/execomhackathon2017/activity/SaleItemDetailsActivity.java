@@ -29,6 +29,9 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 @OptionsMenu(R.menu.item_menu)
@@ -51,6 +54,9 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
 
     @ViewById
     TextView price;
+
+    @ViewById
+    TextView publishDate;
 
     @ViewById
     TextView sellerContact;
@@ -105,11 +111,17 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         initData();
     }
 
+    private String formatDate(Date date) {
+        DateFormat format = SimpleDateFormat.getDateTimeInstance();
+        return format.format(date);
+    }
+
     void initData() {
         name.setText(saleItem.getName());
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f $", saleItem.getPrice()));
         sellerContact.setText(saleItem.getUser().getContact());
+        publishDate.setText(formatDate(saleItem.getPublishDate()));
         if (saleItem.getImagePath() != null)
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
     }

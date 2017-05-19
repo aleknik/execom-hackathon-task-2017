@@ -3,7 +3,7 @@
     <string name="login">Log In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="logout">Log out</string>
+    <string name="logout">Log Out</string>
     <string name="layout_toggle">Layout Toggle</string>
     <string name="signup_link">No account yet? Create one</string>
     <string name="register">Register</string>
@@ -14,11 +14,12 @@
     <string name="all_items">All Items</string>
     <string name="my_items">My Listings</string>
     <string name="no_data_available">Wow, such empty</string>
-    <string name="seller_contact">Seller contact</string>
+    <string name="seller_contact">Seller Contact</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="image">Image</string>
     <string name="camera">Camera</string>
     <string name="browse">Browse</string>
+    <string name="publish_date">Publish Date</string>
 </resources>
