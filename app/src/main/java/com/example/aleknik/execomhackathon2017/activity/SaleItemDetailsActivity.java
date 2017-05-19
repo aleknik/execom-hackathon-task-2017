@@ -3,8 +3,6 @@ package com.example.aleknik.execomhackathon2017.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -112,7 +110,7 @@ public class SaleItemDetailsActivity extends AppCompatActivity {
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f $", saleItem.getPrice()));
         sellerContact.setText(saleItem.getUser().getContact());
-        if(saleItem.getImagePath() != null)
+        if (saleItem.getImagePath() != null)
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(saleItem.getImagePath()).build());
     }
 

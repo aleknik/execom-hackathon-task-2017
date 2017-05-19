@@ -52,8 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/large_margin"
+                android:ellipsize="end"
                 android:maxLines="7"
-                android:scrollbars="vertical"
                 android:textColor="@color/secondary_text" />
 
 
