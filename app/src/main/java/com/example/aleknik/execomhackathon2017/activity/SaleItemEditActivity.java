@@ -2,6 +2,7 @@ package com.example.aleknik.execomhackathon2017.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class SaleItemEditActivity extends AppCompatActivity {
 
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int PICK_IMAGE = 2;
+
+    private static final String PHOTO_PATH = "PHOTO_PATH";
 
     String currentPhotoPath = null;
 
@@ -86,11 +89,9 @@ public class SaleItemEditActivity extends AppCompatActivity {
         name.setText(saleItem.getName());
         description.setText(saleItem.getDescription());
         price.setText(String.format(Locale.ENGLISH, "%.2f", saleItem.getPrice()));
-        currentPhotoPath = saleItem.getImagePath();
-        if(saleItem.getImagePath() != null)
-            image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
-
-
+        if (currentPhotoPath == null)
+            currentPhotoPath = saleItem.getImagePath();
+        image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
     }
 
     @Override
@@ -187,5 +188,19 @@ public class SaleItemEditActivity extends AppCompatActivity {
         }
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putString(PHOTO_PATH, currentPhotoPath);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            currentPhotoPath = savedInstanceState.getString(PHOTO_PATH);
+        }
     }
 }

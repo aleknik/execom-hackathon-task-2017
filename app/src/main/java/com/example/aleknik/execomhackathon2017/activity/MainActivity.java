@@ -1,6 +1,7 @@
 package com.example.aleknik.execomhackathon2017.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -93,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
             allItems.setVisible(false);
             fab.hide();
         }
+        MenuItem layoutOption = menu.findItem(R.id.layoutOption);
+        if(gridLayout)
+            layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_stream_white_24dp, null));
+        else
+            layoutOption.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_view_quilt_white_24dp, null));
         return true;
     }
 
@@ -145,8 +151,11 @@ public class MainActivity extends AppCompatActivity {
         });
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         gridLayoutManager = new StaggeredGridLayoutManager(2, 1);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        gridLayout = false;
+        if(gridLayout)
+            recyclerView.setLayoutManager(gridLayoutManager);
+        else
+            recyclerView.setLayoutManager(linearLayoutManager);
+        
         recyclerView.setAdapter(saleItemAdapter);
         if (userPreferences.id().exists()) {
             fab.show();
@@ -234,5 +243,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putBoolean("layout", gridLayout);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            gridLayout = savedInstanceState.getBoolean("layout");
+        }
+    }
 
 }
