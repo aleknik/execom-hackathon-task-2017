@@ -118,6 +118,10 @@ public class NewSaleItemActivity extends AppCompatActivity {
             Log.d(TAG, currentPhotoPath);
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
         }
+        else {
+            fileUtils.deleteImage(currentPhotoPath);
+            currentPhotoPath = null;
+        }
     }
 
     @Click

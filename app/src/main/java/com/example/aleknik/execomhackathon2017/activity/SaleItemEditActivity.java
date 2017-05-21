@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -155,6 +154,9 @@ public class SaleItemEditActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Log.d(TAG, currentPhotoPath);
             image.setImageURI(new Uri.Builder().scheme(UriUtil.LOCAL_FILE_SCHEME).path(currentPhotoPath).build());
+        } else {
+            fileUtils.deleteImage(currentPhotoPath);
+            currentPhotoPath = saleItem.getImagePath();
         }
     }
 
@@ -167,7 +169,7 @@ public class SaleItemEditActivity extends AppCompatActivity {
         pickIntent.setType("image/*");
 
         Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
 
         startActivityForResult(chooserIntent, PICK_IMAGE);
     }
